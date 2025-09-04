@@ -698,6 +698,7 @@ const Home = () => {
 
 
             {/* Technologies Section with Category Slider */}
+            {/* Technologies Section with Enhanced Card Design */}
             <section id="technologies" className="py-20 bg-white dark:bg-gray-900">
                 <div className="max-w-7xl mx-auto px-6">
                     <motion.div
@@ -719,7 +720,7 @@ const Home = () => {
                                 key={i}
                                 variant={currentTechCategory === i ? "default" : "outline"}
                                 onClick={() => setCurrentTechCategory(i)}
-                                className="rounded-xl"
+                                className="rounded-xl bg-gradient-to-r from-teal-500 to-blue-500 hover:from-teal-600 hover:to-blue-600 text-white border-none"
                             >
                                 {category.category}
                             </Button>
@@ -738,13 +739,25 @@ const Home = () => {
                                         {category.items.map((tech, j) => (
                                             <motion.div
                                                 key={j}
-                                                initial={{ opacity: 0, y: 40 }}
-                                                whileInView={{ opacity: 1, y: 0 }}
-                                                transition={{ duration: 0.6, delay: j * 0.1 }}
+                                                initial={{ opacity: 0, y: 40, scale: 0.95 }}
+                                                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                                                whileHover={{
+                                                    scale: 1.05,
+                                                    rotate: 2,
+                                                    boxShadow: "0 10px 20px rgba(45, 212, 191, 0.3)"
+                                                }}
+                                                transition={{
+                                                    duration: 0.6,
+                                                    delay: j * 0.1,
+                                                    hover: { type: "spring", stiffness: 300 }
+                                                }}
                                                 viewport={{ once: true }}
-                                                className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-6 shadow-lg text-center flex items-center justify-center"
+                                                className="relative bg-gradient-to-br from-white to-teal-50 dark:from-gray-800 dark:to-gray-900 rounded-2xl p-6 shadow-xl border border-teal-200 dark:border-teal-700 overflow-hidden"
                                             >
-                                                <span className="text-lg font-medium">{tech}</span>
+                                                <div className="absolute inset-0 bg-gradient-to-r from-teal-400/10 to-blue-400/10 dark:from-teal-600/10 dark:to-blue-600/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                                                <span className="relative text-lg font-bold text-teal-600 dark:text-teal-300 z-10">
+                                                    {tech}
+                                                </span>
                                             </motion.div>
                                         ))}
                                     </div>
@@ -758,7 +771,7 @@ const Home = () => {
                             <button
                                 key={i}
                                 onClick={() => setCurrentTechCategory(i)}
-                                className={`w-3 h-3 rounded-full mx-2 ${i === currentTechCategory ? "bg-teal-500" : "bg-gray-300"}`}
+                                className={`w-3 h-3 rounded-full mx-2 ${i === currentTechCategory ? "bg-teal-500" : "bg-gray-300 dark:bg-gray-600"} transition-colors duration-300`}
                             />
                         ))}
                     </div>
